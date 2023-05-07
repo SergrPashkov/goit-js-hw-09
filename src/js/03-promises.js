@@ -13,8 +13,17 @@ function handleSubmit(event) {
   //  delayTime = delay.value;
   let delayTime = Number(delay.value);
 
+  function createPromise(position, delay) {
+  const shouldResolve = Math.random() > 0.3;
+  if (shouldResolve) {
+    Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+  } else {
+    Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+  }
+}
+
   setTimeout(() => {
-  timerId = setInterval(() => {
+  const timerId = setInterval(() => {
 
     createPromise(callPromise, delayTime);
 
@@ -30,13 +39,4 @@ function handleSubmit(event) {
 
   }, Number(step.value));
   },Number(delay.value));
-}
-
-function createPromise(position, delay) {
-  const shouldResolve = Math.random() > 0.3;
-  if (shouldResolve) {
-    Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-  } else {
-    Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-  }
 }
