@@ -10,7 +10,7 @@ function handleSubmit(event) {
   const {
     elements: { delay, step, amount }
   } = event.currentTarget
-  //  delayTime = delay.value;
+  
   let delayTime = Number(delay.value);
 
   function createPromise(position, delay) {
@@ -23,12 +23,12 @@ function handleSubmit(event) {
 }
 
   setTimeout(() => {
-  const timerId = setInterval(() => {
+  let timerId = setInterval(() => {
 
     createPromise(callPromise, delayTime);
 
     Number(amount.value);
-    stepValue = Number(step.value);
+    let stepValue = Number(step.value);
     delayTime += stepValue;
 
     if (callPromise === Number(amount.value)) {
