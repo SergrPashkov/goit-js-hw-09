@@ -36,9 +36,10 @@ let timerDay = document.querySelector('[data-days]');
 let timerHours = document.querySelector('[data-hours]');
 let timerMinutes = document.querySelector('[data-minutes]');
 let timerSeconds = document.querySelector('[data-seconds]');
+let inputData = document.querySelector('#datetime-picker');
 
 function timerStart(deltaTime) {
-	setInterval(() => {
+	const intervalTimer = setInterval(() => {
 		deltaTime -= 1000;
 		
 		const { days, hours, minutes, seconds } = convertMs(deltaTime)
@@ -47,6 +48,10 @@ function timerStart(deltaTime) {
 		timerMinutes.textContent = minutes;
 		timerSeconds.textContent = seconds;
 		
+		if (seconds === "00" && minutes === "00" && hours === "00" && days === "00"){
+			clearInterval(intervalTimer);
+			inputData.removeAttribute('disabled', '');
+		}
 	}, 1000)
 }
 
@@ -70,10 +75,11 @@ const options = {
 
 flatpickr("#datetime-picker", options).selectedDates[0];
 
-
 buttonClick.addEventListener("click", () => timer());
 
 function timer() {
 	buttonClick.setAttribute('disabled', '');
+	inputData.setAttribute('disabled', '');
+	
 	timerStart(deltaTime);
 }
